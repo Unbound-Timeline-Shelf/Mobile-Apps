@@ -20,7 +20,7 @@ The client uses the Windows App SDK and WebView2. It includes saved server confi
 
 ## PWA
 
-Copy `pwa/*` into the hosted frontend public root and register the service worker. API and authentication traffic is always network-only.
+The [official PWA plugin](https://github.com/Unbound-Timeline-Shelf/Plugins/tree/main/official/pwa) supplies install metadata and assets through the host. Do not copy these files directly into the host public root; see [the PWA asset guide](../pwa/README.md). API and authentication traffic remains network-only.
 
 ## Releases
 

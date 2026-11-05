@@ -6,7 +6,7 @@
   <Identity Name="ArchiveTracking.Web" Publisher="CN=ArchiveTracking" Version="1.0.0.0" ProcessorArchitecture="x64" />
   <Properties>
     <DisplayName>Archive Tracking Web</DisplayName>
-    <PublisherDisplayName>Archive Tracking</PublisherDisplayName>
+    <PublisherDisplayName>Obsolete Labs</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>

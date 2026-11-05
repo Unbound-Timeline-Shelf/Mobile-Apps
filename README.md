@@ -11,4 +11,4 @@ Official companion clients for a self-hosted Unnamed Tracking server.
 
 All clients require an `https://` server. Passwords are submitted only inside encrypted HTTPS requests, are never stored by these clients, and authentication error bodies are never reflected to users.
 
-See [docs/CLIENTS.md](docs/CLIENTS.md) for setup and release details.
+See [docs/CLIENTS.md](docs/CLIENTS.md) for setup and release details. The clients connect to the [Unbound Timeline Shelf server](https://github.com/Unbound-Timeline-Shelf/Unbound-Timeline-Shelf); downloads are published in this repository's [releases](https://github.com/Unbound-Timeline-Shelf/Mobile-Apps/releases).
