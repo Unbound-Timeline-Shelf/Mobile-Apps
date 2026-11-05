@@ -1,26 +1,29 @@
-# Windows WebView2 client
+# Windows client
 
-Tracking Windows Web is a lightweight WPF application for Windows 10 and newer. It renders the hosted Vue frontend through the Microsoft Edge WebView2 runtime, so frontend UI changes appear without rebuilding the Windows application.
+Tracking Windows is a WinUI 3 desktop shell for the hosted interface. It uses
+WebView2 and requires an HTTPS server address.
 
 ## Install
 
-- Normal users should download the signed `tracking-windows-web.msix` from GitHub Releases.
-- The portable `tracking-windows-web.zip` can be extracted and launched with `Tracking.Windows.exe`.
-- Install the Microsoft Edge WebView2 Evergreen Runtime if it is not already present.
+Download the self-contained `Unnamed-Tracking-Windows-win-x64.zip` from this
+repository's [releases](https://github.com/Unbound-Timeline-Shelf/Mobile-Apps/releases),
+extract it, and launch `Tracking.Windows.exe`. The release workflow publishes
+the ZIP; it does not currently publish a signed MSIX. Pull-request builds also
+provide a self-contained Windows artifact in the CI run.
 
-On first launch, enter the full HTTP or HTTPS server address. The setting is stored under the current user's local application-data directory. WebView2 owns cookies and browser storage inside its application profile; secrets are not written to the server-address file.
+Enter the HTTPS server address on first launch. The client stores the server
+configuration locally and leaves cookies and browser storage to WebView2.
 
 ## Develop and test
 
-Use Visual Studio 2022 or the .NET 8 SDK on Windows:
+On Windows with the .NET 8 SDK:
 
 ```powershell
-dotnet test Tracking.Windows.Tests/Tracking.Windows.Tests.csproj
-dotnet run --project Tracking.Windows/Tracking.Windows.csproj
+dotnet test src/windowsapp/Tracking.Windows.Tests/Tracking.Windows.Tests.csproj -c Release
+dotnet build src/windowsapp/Tracking.Windows/Tracking.Windows.csproj -c Release -p:Platform=x64
+dotnet publish src/windowsapp/Tracking.Windows/Tracking.Windows.csproj -c Release -r win-x64 --self-contained true -p:Platform=x64 -p:WindowsAppSDKSelfContained=true -o artifacts/windows
 ```
 
-`Tracking.Core` contains the platform-neutral server-address contract and its tests. `Tracking.Windows` contains the WPF/WebView2 shell. `packaging` contains the MSIX manifest and visual assets. The GitHub workflow produces both a portable ZIP and an unsigned development MSIX for pull requests; tagged Releases require the configured signing certificate.
-
-## Why there is no second native WinUI client
-
-The WebView2 client already behaves as a conventional Windows application while following Vue changes automatically. A separate WinUI implementation would duplicate every screen and authentication workflow. The project can add one later if real usage identifies Windows-specific workflows that justify that maintenance cost.
+`Tracking.Core` contains the server-address contract; `Tracking.Windows` is
+the WinUI/WebView2 shell. See [client applications](../../docs/CLIENTS.md) for
+the Android and PWA clients.
